@@ -25,3 +25,7 @@ f a + b -- f(a) + b
 f (g x) -- f(g(x))
 f x (g y) -- f(x, g(y))
 f x * g y -- f(x) * g(y)
+
+-- infix function
+add x y = x + y
+x `add` y -- bckticks make add infix
