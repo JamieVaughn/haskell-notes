@@ -50,8 +50,11 @@ length "Hello" -- can also use head, tail, last, init, reverse, null builtin fun
 -- lexical error is a static error regarding syntax -- "Hello
 -- type error indicate a semantic fault like providing the wrong type to a function -- not "Hello"
 
--- Types
+-- Types, uses [] and leaves length unrestricted
 :t True -- finds the type True :: Bool, "Hi" :: [Char] <- list of Chars
 :t not -- not :: Bool -> Bool
 :t length -- [a] -> Int -- a is a generic type
 [True, "hello"] -- type error, lists must be of the same type
+
+-- Tuple, uses () and specifies length
+(False, True) :: (Bool, Bool) -- Tuple defines type and lengths
