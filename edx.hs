@@ -58,3 +58,39 @@ length "Hello" -- can also use head, tail, last, init, reverse, null builtin fun
 
 -- Tuple, uses () and specifies length
 (False, True) :: (Bool, Bool) -- Tuple defines type and lengths
+
+-- Guarded Equations -- as an alternative to `if then else` ternary expressions
+-- the catchall condition otherwise is defined in the prelude by otherwise = True
+signum n | n < 0     = -1
+         | n == 0    = 0
+         | otherwise = 1
+
+-- Pattern Matching
+not       :: Bool -> Bool
+not False = True
+not True  = False
+
+(&&)          :: Bool -> Bool -> Bool
+True && True   = True
+True && False  = False
+False && True  = False
+False && False = False
+-- which can be expressed more concisely with point free variable syntax using `_`
+True && True = True
+_    && _    = False
+-- which can also be expressed another way with piped variable of b (cannot repeat b, though)
+True  && b = b
+False && _ = False
+
+-- examples -- parens are needed because function application binds strongest)
+head      :: [a] -> a
+head (x:_) = x
+
+tail       :: [a] -> [a]
+tail (_:xs) = xs
+-- these both will error on empty list because no case will match
+
+-- Sections -- partially applying functions
+(+) 1 2 -- 3
+(1+) 2 -- 3
+(+2) 1 -- 3
