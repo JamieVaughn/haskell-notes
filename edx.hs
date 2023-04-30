@@ -94,3 +94,26 @@ tail (_:xs) = xs
 (+) 1 2 -- 3
 (1+) 2 -- 3
 (+2) 1 -- 3
+
+-- List Comprehensions
+[x^2 | x <- [1..5]] -- creates list of squares from 1 through 5
+[(x,y) | x <- [1,2,3], y <- [4,5]] -- creates [(1,4),(1,5),(2,4),(2,5),(3,4),3,5)] similar to nested loops. y is inner loop, x is outer loop
+-- change order of generators
+[(x,y) | y <- [4,5], x <- [1,2,3]]
+-- Dependent Generators -- similar to inner loop and outer loop, where inner loop can use variables in the outerloop
+[(x,y) | x <- [1..3], y <- [x..3]] -- = [(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)], all pairs of nums (x,y) with x,y as elements of [1..3] and y >= x
+concat    :: [[a]] -> [a]
+concat xss = [x | xs <- xss, x <- xs]
+concat [[1,2,3],[4,5],[6]] -- = [1,2,3,4,5,6]
+-- Filters, Guards
+[x | x <- [1..10], even x] -- eve x "where clause" is called a guard
+factors  :: Int -> [Int]
+factors n = [x | x <- [1..n], n `mod` x == 0]
+-- use factors to find a prime number
+prime  :: Int -> Bool
+prime n = factors n == [1,n]
+-- use prime to find a list of primes
+primes  :: Int -> [Int]
+primes n = [x | x <- [2..n], prime x]
+primes 40 -- generates primes up to 40
+
