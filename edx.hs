@@ -117,3 +117,13 @@ primes  :: Int -> [Int]
 primes n = [x | x <- [2..n], prime x]
 primes 40 -- generates primes up to 40
 
+-- zip function
+zip :: [a] -> [b] -> [(a,b)]
+zip ['a','b','c'] [1,2,3,4] -- [('a',1),('b',2),('c',3)] (omits the 4 because it stops at the shortest length input)
+
+pairs   :: [a] -> [(a,a)]
+pairs xs = zip xs (tail xs)
+pairs [1,2,3,4] -- [(1,2),(2,3),(3,4)]
+
+sorted.  :: Ord a => [a] -> Bool
+sorted xs = and [x <= y | (x,y) <- pairs xs] -- checks if a list is already sorted
